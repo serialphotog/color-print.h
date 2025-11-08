@@ -56,12 +56,18 @@
 
 // Macro that generates the helper functions for printing colored messages to
 // the console.
-#define DEFINE_COLOR_PRINT(name, color)             \
-    void print_##name(const char *format, ...) {    \
-        va_list args;                               \
-        va_start(args, format);                     \
-        vprint_color(color, format, args);          \
-        va_end(args);                               \
+#define DEFINE_COLOR_PRINT(name, color)                         \
+    void print_##name(const char *format, ...) {                \
+        va_list args;                                           \
+        va_start(args, format);                                 \
+        vprint_color(stdout, color, format, args);              \
+        va_end(args);                                           \
+    }                                                           \
+    void fprint_##name(FILE *stream, const char *format, ...) { \
+        va_list args;                                           \
+        va_start(args, format);                                 \
+        vprint_color(stream, color, format, args);              \
+        va_end(args);                                           \
     }
 
 /**
@@ -73,11 +79,11 @@
  *      - const char *format: The format string to use for printing.
  *      - va_list args: The additional arguments to pass to printf.
 */
-static void vprint_color(const char *color, const char *format, va_list args)
+static void vprint_color(FILE *stream, const char *color, const char *format, va_list args)
 {
-    printf("%s", color);
-    vprintf(format, args);
-    printf("%s", CLI_COLOR_CLEAR);
+    fprintf(stream, "%s", color);
+    vfprintf(stream, format, args);
+    fprintf(stream, "%s", CLI_COLOR_CLEAR);
 }
 
 /**
@@ -92,7 +98,23 @@ void print_color(const char *color, const char *format, ...)
 {
     va_list args;
     va_start(args, format);
-    vprint_color(color, format, args);
+    vprint_color(stdout, color, format, args);
+    va_end(args);
+}
+
+/**
+ * Prints a message using a given color definition to the given file descriptor.
+ *
+ * Args:
+ *      - const char *color: The ANSI color escape sequence to use.
+ *      - const char *format: The format string to use for printing.
+ *      - ... The remaining arguments to pass to `printf`.
+*/
+void fprint_color(FILE *stream, const char *color, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    vprint_color(stream, color, format, args);
     va_end(args);
 }
 
