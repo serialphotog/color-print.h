@@ -87,7 +87,7 @@ static void vprint_color(FILE *stream, const char *color, const char *format, va
 }
 
 /**
- * Print a messsage using a color definition.
+ * Print a message using a color definition.
  *
  * Args:
  *      - const char *color: The ANSI color escape sequence to use.
