@@ -57,13 +57,13 @@
 // Macro that generates the helper functions for printing colored messages to
 // the console.
 #define DEFINE_COLOR_PRINT(name, color)                         \
-    void print_##name(const char *format, ...) {                \
+    static inline void print_##name(const char *format, ...) {                \
         va_list args;                                           \
         va_start(args, format);                                 \
         vprint_color(stdout, color, format, args);              \
         va_end(args);                                           \
     }                                                           \
-    void fprint_##name(FILE *stream, const char *format, ...) { \
+    static inline void fprint_##name(FILE *stream, const char *format, ...) { \
         va_list args;                                           \
         va_start(args, format);                                 \
         vprint_color(stream, color, format, args);              \
@@ -79,7 +79,7 @@
  *      - const char *format: The format string to use for printing.
  *      - va_list args: The additional arguments to pass to printf.
 */
-static void vprint_color(FILE *stream, const char *color, const char *format, va_list args)
+static inline void vprint_color(FILE *stream, const char *color, const char *format, va_list args)
 {
     fprintf(stream, "%s", color);
     vfprintf(stream, format, args);
@@ -94,7 +94,7 @@ static void vprint_color(FILE *stream, const char *color, const char *format, va
  *      - const char *format: The format string to use for printing.
  *      - ... The remaining arguments to pass to `printf`.
 */
-void print_color(const char *color, const char *format, ...) 
+static inline void print_color(const char *color, const char *format, ...) 
 {
     va_list args;
     va_start(args, format);
@@ -110,7 +110,7 @@ void print_color(const char *color, const char *format, ...)
  *      - const char *format: The format string to use for printing.
  *      - ... The remaining arguments to pass to `printf`.
 */
-void fprint_color(FILE *stream, const char *color, const char *format, ...)
+static inline void fprint_color(FILE *stream, const char *color, const char *format, ...)
 {
     va_list args;
     va_start(args, format);
