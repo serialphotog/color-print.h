@@ -10,7 +10,7 @@ This library truly couldn't be any easier to use. Simply include the header in y
 #include "color-print.h"
 ```
 
-From there, you can either use `print_color(const char *color, const char *format, ...)` to print a message using one of the built-in color definitions, or use one of the convenient helper functions to print in a given color. It's also worth noting that the library defines `print_color(FILE *stream, const char *color, const char *format, ...)` to allow you to perform a print to a given file descriptor. You could use this to, for example, print to `stderr` in color.
+From there, you can either use `print_color(const char *color, const char *format, ...)` to print a message using one of the built-in color definitions, or use one of the convenient helper functions to print in a given color. It's also worth noting that the library defines `fprint_color(FILE *stream, const char *color, const char *format, ...)` to allow you to perform a print to a given file descriptor. You could use this to, for example, print to `stderr` in color.
 
 ## Built-in Color Definitions
 
