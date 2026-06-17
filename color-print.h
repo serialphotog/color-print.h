@@ -45,7 +45,9 @@
 #include <stdio.h>
 
 // Color definitions
-#define CLI_COLOR_CLEAR     "\033[31m"
+#define CLI_COLOR_CLEAR     "\033[0m"
+#define CLI_COLOR_RESET     CLI_COLOR_CLEAR
+#define CLI_COLOR_NONE.     CLI_COLOR_CLEAR
 #define CLI_COLOR_RED       "\033[31m"
 #define CLI_COLOR_GREEN     "\033[32m"
 #define CLI_COLOR_YELLOW    "\033[33m"
