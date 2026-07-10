@@ -10,7 +10,12 @@ This library truly couldn't be any easier to use. Simply include the header in y
 #include "color-print.h"
 ```
 
-From there, you can either use `print_color(const char *color, const char *format, ...)` to print a message using one of the built-in color definitions, or use one of the convenient helper functions to print in a given color. It's also worth noting that the library defines `fprint_color(FILE *stream, const char *color, const char *format, ...)` to allow you to perform a print to a given file descriptor. You could use this to, for example, print to `stderr` in color.
+From there, you can either use `print_color(const char *color, const char *format, ...)` to print a message using one of the built-in color definitions, or use one of the convenient helper functions to print in a given color. The library also defines `fprint_color(FILE *stream, const char *color, const char *format, ...)` to print to a given stream. You could use this to, for example, print to `stderr` in color.
+
+```c
+print_green("Created %s\n", filename);
+fprint_red(stderr, "Error: %s\n", message);
+```
 
 ## Built-in Color Definitions
 
@@ -38,7 +43,7 @@ The following helper functions are built in to print in a given color. All of th
 - `print_cyan(const char *format, ...)`
 - `print_grey(const char *format, ...)`
 
-In addition to these, there are a version of each that allows you to specify the file descriptor to print to:
+In addition to these, there is a version of each that allows you to specify the stream to print to:
 
 - `fprint_red(FILE *stream, const char *format, ...)`
 - `fprint_green(FILE *stream, const char *format, ...)`

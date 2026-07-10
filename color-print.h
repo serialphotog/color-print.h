@@ -38,8 +38,8 @@
    For more information, please refer to <http://unlicense.org/>.
 */
 
-#ifndef __COLOR_PRINT_H__
-#define __COLOR_PRINT_H__
+#ifndef COLOR_PRINT_H_INCLUDED
+#define COLOR_PRINT_H_INCLUDED
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -118,7 +118,7 @@ static inline void print_color(const char *color, const char *format, ...)
 }
 
 /**
- * Prints a message using a given color definition to the given file descriptor.
+ * Prints a message using a given color definition to the given stream.
  *
  * Args:
  *      - const char *color: The ANSI color escape sequence to use.
